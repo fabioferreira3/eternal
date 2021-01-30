@@ -40,6 +40,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "react/prop-types": "off",
     "react/jsx-indent": "off",
     "react/jsx-wrap-multilines": ["error", {"declaration": false, "assignment": false}],
