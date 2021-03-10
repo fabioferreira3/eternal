@@ -4,48 +4,73 @@ import Image from 'next/image';
 import dayjs from 'dayjs';
 import { ObjectId } from 'mongodb';
 
-import { connectToDatabase } from '../../util/mongodb.js';
+import { entityFields } from '../../store/states/entityFields';
 
-const Entity: React.FC<any> = ({ entity }): any => {
-  const renderOptionalFields = (): [] => {
-    const fields: any = [];
-    Object.keys(entity.optional_fields).forEach(function (key) {
-      Object.keys(entity.optional_fields[key]).forEach(function (fieldName) {
-        fields.push(
-          <>
-            <h3>
-              {`${fieldName} : ${entity.optional_fields[key][fieldName]}`}
-            </h3>
-          </>
-        );
+import { connectToDatabase } from '../../util/mongodb.js';
+import {
+  OptionalField,
+  OptionalFieldComponent,
+} from '../../store/types/entityFields';
+
+const Entity = ({ entity }): any => {
+  const renderOptionalFields = () => {
+    const fieldComponents: OptionalFieldComponent[] = [];
+    entity.optional_fields.forEach((field: OptionalField) => {
+      fieldComponents.push({
+        element: entityFields[field.type || 'attribute'],
+        ...field,
       });
     });
-    return fields;
+    return (
+      <>
+        {fieldComponents.map(fieldComponentData => {
+          const FieldComponent = fieldComponentData.element;
+          return (
+            <FieldComponent
+              key={fieldComponentData.id}
+              title={fieldComponentData.title}
+              value={fieldComponentData.value}
+            />
+          );
+        })}
+      </>
+    );
   };
 
   return (
     <>
-      {/* <Image */}
-      {/*  src={`/assets/img/profiles/${entity.background_top_img}`} */}
-      {/*  alt="Picture of the author" */}
-      {/*  width={400} */}
-      {/*  height={500} */}
-      {/* /> */}
       <div className="flex flex-col items-center">
-        <Image
-          className="rounded-full"
-          src={`/assets/img/profiles/${entity.profile_img}`}
-          alt="Picture of the author"
-          width={168}
-          height={168}
-        />
-        <h1>{entity.full_name}</h1>
+        <div className="mb-4">
+          <Image
+            className="rounded-full"
+            src={`/assets/img/profiles/${entity.profile_img}`}
+            alt="Picture of the author"
+            width={168}
+            height={168}
+          />
+        </div>
+        <div className="mb-4">
+          <h1 className="text-lg">{entity.full_name}</h1>
+        </div>
       </div>
 
-      <h2>Birthday: {dayjs(entity.birthday).format('DD/MM/YYYY')}</h2>
-      <h2>Death: {dayjs(entity.death_date).format('DD/MM/YYYY')}</h2>
-      <h2>Who was {entity.first_name}?</h2>
-      <span>{entity.who_was}</span>
+      <div className="w-2/3 m-auto">
+        <div className="flex flex-row justify-between">
+          <span className="font-bold">Birthday</span>
+          <span>{dayjs(entity.birthday).format('DD/MM/YYYY')}</span>
+        </div>
+
+        <div className="flex flex-row justify-between">
+          <span className="font-bold">Death</span>
+          <span>{dayjs(entity.birthday).format('DD/MM/YYYY')}</span>
+        </div>
+      </div>
+
+      <div className="mt-4 mb-4">
+        <h2 className="text-xl font-bold">Who was {entity.first_name}?</h2>
+        <span>{entity.who_was}</span>
+      </div>
+
       {entity.optional_fields.length > 0 && renderOptionalFields()}
     </>
   );

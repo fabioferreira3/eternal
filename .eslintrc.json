@@ -41,6 +41,8 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
     "react/prop-types": "off",
     "react/jsx-indent": "off",
     "react/jsx-wrap-multilines": ["error", {"declaration": false, "assignment": false}],
