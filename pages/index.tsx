@@ -3,7 +3,7 @@ import { GetStaticPropsResult } from 'next';
 import Link from 'next/link';
 import { connectToDatabase } from '../util/mongodb.js';
 
-const Home: React.FC<any> = ({ users }) => {
+const Home = ({ users }) => {
   return (
     <ul>
       {users.map(user => (

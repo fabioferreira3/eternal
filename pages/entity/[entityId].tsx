@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { createContext, useCallback } from 'react';
 import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
-import Image from 'next/image';
 import dayjs from 'dayjs';
 import { ObjectId } from 'mongodb';
 
-import { entityFields } from '../../store/states/entityFields';
-
 import { connectToDatabase } from '../../util/mongodb.js';
+import { profileThemes } from '../../store/states/profileImgThemes';
+import { entityFields } from '../../store/states/entityFields';
+import Profile from '../../components/Profile';
 import {
   OptionalField,
   OptionalFieldComponent,
 } from '../../store/types/entityFields';
 
+export const EntityContext = createContext<any>({});
+
 const Entity = ({ entity }): any => {
-  const renderOptionalFields = () => {
+  const renderOptionalFields = useCallback(() => {
     const fieldComponents: OptionalFieldComponent[] = [];
     entity.optional_fields.forEach((field: OptionalField) => {
       fieldComponents.push({
@@ -35,24 +37,11 @@ const Entity = ({ entity }): any => {
         })}
       </>
     );
-  };
+  }, [entity.optional_fields]);
 
   return (
-    <>
-      <div className="flex flex-col items-center">
-        <div className="mb-4">
-          <Image
-            className="rounded-full"
-            src={`/assets/img/profiles/${entity.profile_img}`}
-            alt="Picture of the author"
-            width={168}
-            height={168}
-          />
-        </div>
-        <div className="mb-4">
-          <h1 className="text-lg">{entity.full_name}</h1>
-        </div>
-      </div>
+    <EntityContext.Provider value={{ entity }}>
+      <Profile />
 
       <div className="w-2/3 m-auto">
         <div className="flex flex-row justify-between">
@@ -72,7 +61,7 @@ const Entity = ({ entity }): any => {
       </div>
 
       {entity.optional_fields.length > 0 && renderOptionalFields()}
-    </>
+    </EntityContext.Provider>
   );
 };
 

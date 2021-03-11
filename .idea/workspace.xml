@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc8f36b3-f8c0-4374-8ec8-213cf5563039" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/states/profileImgThemes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/entity/[entityId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/entity/[entityId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +93,8 @@
       <workItem from="1612037226713" duration="5110000" />
       <workItem from="1612102442621" duration="5153000" />
       <workItem from="1612134592364" duration="24000" />
-      <workItem from="1615340518376" duration="5584000" />
+      <workItem from="1615340518376" duration="5640000" />
+      <workItem from="1615418858568" duration="3279000" />
     </task>
     <servers />
   </component>
